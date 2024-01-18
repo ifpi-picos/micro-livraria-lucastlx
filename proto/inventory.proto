@@ -4,7 +4,25 @@ service InventoryService {
     rpc SearchAllProducts(Empty) returns (ProductsResponse) {}
 }
 
+service InventoryService {
+    rpc SearchAllProducts(Empty) returns (ProductsResponse) {}
+    rpc SearchProductByID(Payload) returns (ProductResponse) {}
+}
+
+    SearchProductByID: (payload, callback) => {
+        callback(
+            null,
+            products.find((product) => product.id == payload.request.id)
+        );
+    },
+
+
 message Empty{}
+
+message Payload {
+    int32 id = 1;
+}
+
 
 message ProductResponse {
     int32 id = 1;
